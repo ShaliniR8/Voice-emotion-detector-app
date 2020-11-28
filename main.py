@@ -5,18 +5,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    context = 'Listening...'
+    return render_template('index.html', context=context)
 
 @app.route('/audio', methods=['POST'])
 def audio():
-    with open('./tmp/audio.wav', 'wb') as f:
+    with open('./tmp/sample_voice.wav', 'wb') as f:
         f.write(request.data)
 
     """
     predict uses the tensorflow model to predict 
     !! need to install tensorflow 
     """
-    #print (predict( 'tmp/audio.wav' ))
+    # emotion = predict( 'tmp/sample_voice.wav' )
     
     return
 
@@ -32,7 +33,7 @@ def predict( voice )
         return feature
 
     feature = random(voice)
-    x_t = feature.reshape(1,x.shape[0],1)
+    x_t = feature.reshape(1,fetaure.shape[0],1)
 
     #load model
     
